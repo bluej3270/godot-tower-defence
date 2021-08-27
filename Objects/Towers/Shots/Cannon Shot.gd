@@ -7,7 +7,7 @@ var velocity
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if target.get_ref():
-		velocity = ((target.get_ref().get_global_transrform().origin - position).normanized() * speed)
+		velocity = ((target.get_ref().get_global_transform().origin - position).normalized() * speed)
 		position += velocity * delta
 		rotation = velocity.angle()
 	else:

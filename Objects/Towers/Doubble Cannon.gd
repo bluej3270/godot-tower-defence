@@ -4,7 +4,7 @@ extends Area2D
 var building = true
 var colliding = false
 var can_build = false
-var price = 100
+var price = 150
 
 #Holds enemies in range of tower
 var enemy_array = []
@@ -76,11 +76,21 @@ func _on_ShootTimer_timeout():
 	if current_target:
 		instance = shot.instance()
 		instance.set_target(current_target)
-		instance.position = $Gun/ShotPosition.get_global_transform().origin
+		instance.position = $Gun/ShotPosition1.get_global_transform().origin
 		get_parent().add_child(instance)
-		$Gun/Flame.show()
+		$Gun/Flame1.show()
 		yield(get_tree().create_timer(0.1), "timeout")
-		$Gun/Flame.hide()
+		$Gun/Flame1.hide()
+		
+		yield(get_tree().create_timer(0.5), "timeout")
+		
+		instance = shot.instance()
+		instance.set_target(current_target)
+		instance.position = $Gun/ShotPosition2.get_global_transform().origin
+		get_parent().add_child(instance)
+		$Gun/Flame2.show()
+		yield(get_tree().create_timer(0.1), "timeout")
+		$Gun/Flame2.hide()
 
 func _follow_mouse():
 	position = get_global_mouse_position()
@@ -94,16 +104,6 @@ func _follow_mouse():
 		else: 
 			can_build = false
 
-
-func _on_Cannon_area_entered(area):
-	if area.is_in_group("towers"):
-		colliding = true
-
-
-func _on_Cannon_area_exited(area):
-	if area.is_in_group("towers"):
-		colliding = false
-
 func chose_target():
 	distance_to_t = RADIUS + 1
 	for target in enemy_array:
@@ -112,3 +112,12 @@ func chose_target():
 				current_target = target
 				target_position = target.get_global_transform().origin
 				distance_to_t = (position - target_position).length()
+
+func _on_Doubble_Cannon_area_entered(area):
+	if area.is_in_group("towers"):
+		colliding = true
+
+
+func _on_Doubble_Cannon_area_exited(area):
+	if area.is_in_group("towers"):
+		colliding = false
