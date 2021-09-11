@@ -6,7 +6,7 @@ var move_direction = 0
 
 #Enemy Variables
 var hp = 10
-var speed = 75
+var speed = 125
 var damage = 1
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +24,7 @@ func _on_Area2D_area_entered(area):
 		area.queue_free()
 		hp -= 10
 		if hp <= 0:
-			get_parent().get_parent().add_cash(5)
+			get_parent().get_parent().add_cash(1)
 			queue_free()
 
 func get_damage():

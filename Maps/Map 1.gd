@@ -1,4 +1,5 @@
 extends Node2D
+var esc_visible = false
 
 #enenmy spawning variables
 var mob_t1 = load("res://Objects/Enemies/Tier 1.tscn")
@@ -9,7 +10,7 @@ var instance
 var wave = 0
 var t1_mobs_left = 0
 var t2_mobs_left = 0
-var wave_mobs = [[25, 0], [25, 5], [35, 10]]
+var wave_mobs = [[10, 0], [15, 0], [20, 5], [50, 5], [10, 15], [10, 500]]
 
 #building variables
 var building = false
@@ -23,8 +24,9 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	$UI/Cash.text = str(cash)
+	
 
 
 func _on_WaveTimer_timeout():
@@ -52,7 +54,7 @@ func _on_MobTimer_timeout():
 func _on_Cannon_pressed():
 	if !building and cash >=100:
 		instance = Cannon_Tower.instance()
-		add_child(instance)
+		get_node("Towers").add_child(instance)
 		building = true
 
 func tower_built(price):
@@ -64,7 +66,7 @@ func add_cash(q):
 
 
 func _on_Double_Cannon_pressed():
-	if !building and cash >=150:
+	if !building and cash >=300:
 		instance = Double_Cannon_Tower.instance()
-		add_child(instance)
+		get_node("Towers").add_child(instance)
 		building = true

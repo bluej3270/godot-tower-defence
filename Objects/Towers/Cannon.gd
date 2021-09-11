@@ -10,7 +10,7 @@ var price = 100
 var enemy_array = []
 
 #tilemap variables
-onready var tilemap = get_parent().get_node("TileMap")
+onready var tilemap = get_parent().get_parent().get_node("TileMap")
 var cell_size = Vector2(64, 64)
 var cell_position
 var cell_id
@@ -31,6 +31,9 @@ const RADIUS = 48
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if building:
+		if Input.is_action_just_pressed("R-click"):
+			get_parent().get_parent().tower_built(0)
+			queue_free()
 		_follow_mouse()
 		if can_build:
 			$Base.modulate = Color(0.0, 1.0, 0.0, 0.6)
@@ -40,11 +43,13 @@ func _process(_delta):
 			$Gun.modulate = Color(1.0, 0.0, 0.0, 0.6)
 		if Input.is_action_just_pressed("click") and can_build:
 			building = false
-			get_parent().tower_built(price)
+			get_parent().get_parent().tower_built(price)
 			$Base.modulate = Color(1.0, 1.0, 1.0, 1.0)
 			$Gun.modulate = Color(1.0, 1.0, 1.0, 1.0)
+			$Agro/CollisionShape2D.visible = false
 	else:
 		if !current_target: #if we don't currently have a target
+			$ShootTimer.stop()
 			if enemy_array:
 				current_target = enemy_array[0]
 				chose_target()
@@ -55,8 +60,9 @@ func _process(_delta):
 				current_target = null
 				$ShootTimer.stop()
 			else:
-				target_position = current_target.get_global_transform().origin
-				$Gun.rotation = (target_position - position).angle() + 90
+				if is_instance_valid(current_target):
+					target_position = current_target.get_global_transform().origin
+					$Gun.rotation = (target_position - position).angle() + deg2rad(90)
 
 func _on_Agro_area_entered(area):
 	if area.is_in_group("enemy"):
@@ -67,20 +73,17 @@ func _on_Agro_area_entered(area):
 func _on_Agro_area_exited(area):
 	if area.is_in_group("enemy"):
 		enemy_array.erase(area.get_parent())
-	if !building:
-		if current_target and area.get_parent() == current_target:
-			current_target = null
-			$ShootTimer.stop()
 
 func _on_ShootTimer_timeout():
-	if current_target:
-		instance = shot.instance()
-		instance.set_target(current_target)
-		instance.position = $Gun/ShotPosition.get_global_transform().origin
-		get_parent().add_child(instance)
-		$Gun/Flame.show()
-		yield(get_tree().create_timer(0.1), "timeout")
-		$Gun/Flame.hide()
+		chose_target()
+		if current_target:
+			instance = shot.instance()
+			instance.set_target(current_target)
+			instance.position = $Gun/ShotPosition.get_global_transform().origin
+			get_parent().add_child(instance)
+			$Gun/Flame.show()
+			yield(get_tree().create_timer(0.1), "timeout")
+			$Gun/Flame.hide()
 
 func _follow_mouse():
 	position = get_global_mouse_position()
@@ -106,9 +109,12 @@ func _on_Cannon_area_exited(area):
 
 func chose_target():
 	distance_to_t = RADIUS + 1
-	for target in enemy_array:
-		if enemy_array:
+	if enemy_array:
+		current_target = enemy_array[0]
+		for target in enemy_array:
 			if target.get_offset() > current_target.get_offset():
 				current_target = target
 				target_position = target.get_global_transform().origin
 				distance_to_t = (position - target_position).length()
+	else: 
+		current_target = null

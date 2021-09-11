@@ -1,18 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile250.png" type="Texture" id=1]
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile180.png" type="Texture" id=2]
 [ext_resource path="res://Objects/Towers/Doubble Cannon.gd" type="Script" id=3]
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile297.png" type="Texture" id=4]
+[ext_resource path="res://Assets/AggroShader.tres" type="Material" id=5]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 24 )
-
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 168.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 24 )
 
 [node name="Doubble Cannon" type="Area2D"]
 script = ExtResource( 3 )
+
+[node name="Agro" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Agro"]
+material = ExtResource( 5 )
+shape = SubResource( 1 )
 
 [node name="Base" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -39,15 +46,10 @@ position = Vector2( 5.5, -32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 1 )
-
-[node name="Agro" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Agro"]
 shape = SubResource( 2 )
 
 [node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.75
 
 [connection signal="area_entered" from="." to="." method="_on_Doubble_Cannon_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Doubble_Cannon_area_exited"]

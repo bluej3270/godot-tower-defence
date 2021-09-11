@@ -1,7 +1,7 @@
 extends Area2D
 
 var target = null
-var speed = 200
+var speed = 800
 var velocity
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
