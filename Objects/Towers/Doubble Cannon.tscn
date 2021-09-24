@@ -16,9 +16,11 @@ extents = Vector2( 24, 24 )
 script = ExtResource( 3 )
 
 [node name="Agro" type="Area2D" parent="."]
+material = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Agro"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Agro"]
-material = ExtResource( 5 )
 shape = SubResource( 1 )
 
 [node name="Base" type="Sprite" parent="."]
