@@ -96,4 +96,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="pressed" from="Panel/Control/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Panel/Control/Maps" to="." method="_on_Maps_pressed"]
 [connection signal="pressed" from="Panel/Control/Exit" to="." method="_on_Exit_pressed"]

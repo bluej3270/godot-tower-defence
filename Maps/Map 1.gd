@@ -22,18 +22,14 @@ var Double_Cannon_Tower = load("res://Objects/Towers/Doubble Cannon.tscn")
 func _ready():
 	$WaveTimer.start()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	$UI/Cash.text = str(cash)
-	
-
 
 func _on_WaveTimer_timeout():
 	t1_mobs_left = wave_mobs[wave] [0]
 	t2_mobs_left = wave_mobs[wave] [1]
 	$MobTimer.start()
-
 
 func _on_MobTimer_timeout():
 	if t1_mobs_left > 0:
@@ -70,3 +66,6 @@ func _on_Double_Cannon_pressed():
 		instance = Double_Cannon_Tower.instance()
 		get_node("Towers").add_child(instance)
 		building = true
+
+func set_cash(num):
+	cash = num

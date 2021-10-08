@@ -46,7 +46,7 @@ func _process(_delta):
 			get_parent().get_parent().tower_built(price)
 			$Base.modulate = Color(1.0, 1.0, 1.0, 1.0)
 			$Gun.modulate = Color(1.0, 1.0, 1.0, 1.0)
-			$Agro/CollisionShape2D.visible = false
+			$Agro/Sprite.hide()
 	else:
 		if !current_target: #if we don't currently have a target
 			$ShootTimer.stop()
@@ -118,3 +118,15 @@ func chose_target():
 				distance_to_t = (position - target_position).length()
 	else: 
 		current_target = null
+
+
+func _on_Button_pressed():
+	$Agro/Sprite.show()
+	
+func _input(event):
+	if (event is InputEventMouseButton) and event.pressed:
+		print("Event Detected")
+		var evLocal = make_input_local(event)
+		if !Rect2(Vector2(-25,-25),Vector2(50,50)).has_point(evLocal.position):
+			print("Event NOT in area")
+			$Agro/Sprite.hide()

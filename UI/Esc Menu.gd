@@ -15,10 +15,14 @@ func _process(_delta):
 
 func _on_Restart_pressed():
 	get_parent().get_tree().reload_current_scene()
+	get_parent().get_parent().set_cash(125)
+	get_tree().paused = false
+	self.hide()
 
 
 func _on_Maps_pressed():
-	pass # Replace with function body.
+	get_tree().paused = false
+	get_tree().change_scene("res://UI/Map Selection.tscn")
 
 
 func _on_Exit_pressed():
