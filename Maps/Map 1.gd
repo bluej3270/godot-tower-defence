@@ -14,7 +14,7 @@ var wave_mobs = [[10, 0], [15, 0], [20, 5], [50, 5], [10, 15], [10, 500]]
 
 #building variables
 var building = false
-var cash = 125
+var cash = 500
 var Cannon_Tower = load("res://Objects/Towers/Cannon.tscn")
 var Double_Cannon_Tower = load("res://Objects/Towers/Doubble Cannon.tscn")
 
