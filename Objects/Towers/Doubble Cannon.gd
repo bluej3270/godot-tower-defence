@@ -31,6 +31,7 @@ const RADIUS = 48
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if building:
+		$DeleteButton.hide()
 		if Input.is_action_just_pressed("R-click"):
 			get_parent().get_parent().tower_built(0)
 			queue_free()
@@ -127,3 +128,18 @@ func _on_Doubble_Cannon_area_entered(area):
 func _on_Doubble_Cannon_area_exited(area):
 	if area.is_in_group("towers"):
 		colliding = false
+
+func _on_Button_pressed():
+		$Agro/Sprite.show()
+		$DeleteButton.show()
+	
+func _input(event):
+	if (event is InputEventMouseButton) and event.pressed:
+		var evLocal = make_input_local(event)
+		if !Rect2(Vector2(-25,-25),Vector2(50,100)).has_point(evLocal.position):
+			$DeleteButton.hide()
+			$Agro/Sprite.hide()
+
+
+func _on_DeleteButton_button_up():
+	queue_free()

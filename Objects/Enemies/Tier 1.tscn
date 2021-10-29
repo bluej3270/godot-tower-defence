@@ -3,6 +3,7 @@
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile245.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Enemies/Tier 1.gd" type="Script" id=2]
 
+
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 10.2651
 height = 12.0

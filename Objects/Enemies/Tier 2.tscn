@@ -3,6 +3,7 @@
 [ext_resource path="res://Objects/Enemies/Tier 2.gd" type="Script" id=1]
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile246.png" type="Texture" id=2]
 
+
 [sub_resource type="CapsuleShape2D" id=1]
 height = 12.0
 
