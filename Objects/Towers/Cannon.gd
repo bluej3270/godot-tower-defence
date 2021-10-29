@@ -31,6 +31,7 @@ const RADIUS = 48
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if building:
+		$DeleteButton.hide()
 		if Input.is_action_just_pressed("R-click"):
 			get_parent().get_parent().tower_built(0)
 			queue_free()
@@ -121,12 +122,16 @@ func chose_target():
 
 
 func _on_Button_pressed():
-	$Agro/Sprite.show()
+		$Agro/Sprite.show()
+		$DeleteButton.show()
 	
 func _input(event):
 	if (event is InputEventMouseButton) and event.pressed:
-		print("Event Detected")
 		var evLocal = make_input_local(event)
-		if !Rect2(Vector2(-25,-25),Vector2(50,50)).has_point(evLocal.position):
-			print("Event NOT in area")
+		if !Rect2(Vector2(-25,-25),Vector2(50,100)).has_point(evLocal.position):
+			$DeleteButton.hide()
 			$Agro/Sprite.hide()
+
+
+func _on_DeleteButton_button_up():
+	queue_free()

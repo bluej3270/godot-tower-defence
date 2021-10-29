@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile249.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Towers/Cannon.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile297.png" type="Texture" id=4]
 [ext_resource path="res://Assets/AggroShader.tres" type="Material" id=5]
 [ext_resource path="res://Assets/Semi-Transparent Circle.png" type="Texture" id=6]
+[ext_resource path="res://Objects/Util/DeleteButton.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 168.0
@@ -62,9 +63,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DeleteButton" parent="." instance=ExtResource( 7 )]
+
 [connection signal="area_entered" from="." to="." method="_on_Cannon_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Cannon_area_exited"]
 [connection signal="area_entered" from="Agro" to="." method="_on_Agro_area_entered"]
 [connection signal="area_exited" from="Agro" to="." method="_on_Agro_area_exited"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="button_up" from="DeleteButton" to="." method="_on_DeleteButton_button_up"]
