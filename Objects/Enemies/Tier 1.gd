@@ -23,9 +23,15 @@ func _on_Area2D_area_entered(area):
 	if area.is_in_group("Cannon Shot"):
 		area.queue_free()
 		hp -= 10
-		if hp <= 0:
-			get_parent().get_parent().add_cash(1)
-			queue_free()
+	elif area.is_in_group("Missle"):
+		if not area.getExplode():
+			area.explode()
+	elif area.is_in_group("MissleExplosion"):
+		if area.getExplode():
+			hp -= 20
+	if hp <= 0:
+		get_parent().get_parent().add_cash(1)
+		queue_free()
 
 func get_damage():
 	return damage

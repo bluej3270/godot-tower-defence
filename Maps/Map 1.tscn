@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile249.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile289.png" type="Texture" id=8]
 [ext_resource path="res://UI/Death Screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI/Esc Menu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/PNG/Default size/towerDefense_tile206.png" type="Texture" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Main Tiles"
@@ -113,6 +114,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Missle" type="TextureButton" parent="UI"]
+margin_left = 1632.0
+margin_top = 192.0
+margin_right = 1696.0
+margin_bottom = 256.0
+texture_normal = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Missle"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -90.0
+margin_top = -35.0
+margin_right = 90.0
+margin_bottom = 4.0
+custom_fonts/font = ExtResource( 4 )
+text = "Missle Launcher - 300"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="Cash" type="Label" parent="UI"]
 margin_left = 43.5243
 margin_top = 75.0
@@ -205,5 +232,6 @@ z_index = -1
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 [connection signal="pressed" from="UI/Cannon" to="." method="_on_Cannon_pressed"]
+[connection signal="pressed" from="UI/Missle" to="." method="_on_Missle_pressed"]
 [connection signal="pressed" from="UI/Double Cannon" to="." method="_on_Double_Cannon_pressed"]
 [connection signal="area_entered" from="End Area" to="End Area" method="_on_End_Area_area_entered"]

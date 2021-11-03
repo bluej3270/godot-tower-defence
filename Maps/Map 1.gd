@@ -17,6 +17,7 @@ var building = false
 var cash = 500
 var Cannon_Tower = load("res://Objects/Towers/Cannon.tscn")
 var Double_Cannon_Tower = load("res://Objects/Towers/Doubble Cannon.tscn")
+var Missle_Tower = load("res://Objects/Towers/MissleLauncher.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,10 +63,17 @@ func add_cash(q):
 
 
 func _on_Double_Cannon_pressed():
-	if !building and cash >=300:
+	if !building and cash >=150:
 		instance = Double_Cannon_Tower.instance()
 		get_node("Towers").add_child(instance)
 		building = true
 
 func set_cash(num):
 	cash = num
+
+
+func _on_Missle_pressed():
+	if !building and cash >=300:
+		instance = Missle_Tower.instance()
+		get_node("Towers").add_child(instance)
+		building = true
