@@ -10,14 +10,15 @@ var instance
 var wave = 0
 var t1_mobs_left = 0
 var t2_mobs_left = 0
-var wave_mobs = [[10, 0], [15, 0], [20, 5], [50, 5], [10, 15], [10, 500]]
+var wave_mobs = [[10, 0, 10], [15, 0, 20], [20, 5, 25], [50, 5, 50], [10, 15, 50], [100, 30, 50], [150, 60, 100], [0, 100, 100]]
 
 #building variables
 var building = false
-var cash = 500
+var cash = 150
 var Cannon_Tower = load("res://Objects/Towers/Cannon.tscn")
 var Double_Cannon_Tower = load("res://Objects/Towers/Doubble Cannon.tscn")
 var Missle_Tower = load("res://Objects/Towers/MissleLauncher.tscn")
+var Double_Missle_Tower = load("res://Objects/Towers/Doubble Missle.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,6 +44,7 @@ func _on_MobTimer_timeout():
 		t2_mobs_left -= 1
 	if t2_mobs_left <= 0 and t1_mobs_left <= 0:
 		$MobTimer.stop()
+		cash += wave_mobs[wave] [2]
 		wave += 1
 		if wave < len(wave_mobs):
 			$WaveTimer.start()
@@ -75,5 +77,12 @@ func set_cash(num):
 func _on_Missle_pressed():
 	if !building and cash >=300:
 		instance = Missle_Tower.instance()
+		get_node("Towers").add_child(instance)
+		building = true
+
+
+func _on_Double_Missle_pressed():
+	if !building and cash >=450:
+		instance = Double_Missle_Tower.instance()
 		get_node("Towers").add_child(instance)
 		building = true

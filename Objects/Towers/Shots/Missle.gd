@@ -11,9 +11,12 @@ func _process(delta):
 		velocity = ((target.get_ref().get_global_transform().origin - position).normalized() * speed)
 		position += velocity * delta
 		rotation = velocity.angle() + deg2rad(90)
-	elif not exploded:
+	elif not exploded and velocity:
+		print("No Target")
 		position += velocity * delta
-		
+	else:
+		print("Queue Free")
+		self.queue_free()
 
 func set_target(new_target):
 	target = weakref(new_target)
@@ -28,7 +31,7 @@ func explode():
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+	self.queue_free()
 
 
 func _on_Timer_timeout():

@@ -35,3 +35,7 @@ func _on_Area2D_area_entered(area):
 
 func get_damage():
 	return damage
+
+func kill():
+	get_parent().get_parent().add_cash(1)
+	queue_free()

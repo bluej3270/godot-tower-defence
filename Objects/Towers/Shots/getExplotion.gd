@@ -8,10 +8,10 @@ func getExplode():
 func _on_Area2D_area_entered(area):
 	if getExplode():
 		if area.is_in_group("enemy"):
-			area.queue_free()
+			area.get_parent().kill()
 
 
 func _on_Area2D_area_exited(area):
 	if getExplode():
 		if area.is_in_group("enemy"):
-			area.queue_free()
+			area.get_parent().kill()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Objects/Towers/Shots/Missle.gd" type="Script" id=1]
-[ext_resource path="res://Assets/PNG/Default size/towerDefense_tile252.png" type="Texture" id=2]
+[ext_resource path="res://Assets/PNG/Default size/towerDefense_tile251.png" type="Texture" id=2]
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile019.png" type="Texture" id=3]
 [ext_resource path="res://Assets/PNG/Default size/towerDefense_tile021.png" type="Texture" id=4]
 [ext_resource path="res://Objects/Towers/Shots/getExplotion.gd" type="Script" id=5]
@@ -37,7 +37,9 @@ color = Color( 0.85098, 0.490196, 0.0352941, 1 )
 script = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 0, -20, 5, -14, 7, -6, 8, 1, 6, 7, 10, 10, 8, 20, 2, 20, 1, 17, -0.498966, 17.0877, -1, 20, -7, 20, -9, 11, -6, 6, -7, 1, -6, -7, -3, -15 )
+visible = false
+position = Vector2( 0.287174, 0.143589 )
+polygon = PoolVector2Array( -0.081295, -17.6791, 3.72376, -14.1612, 5.80577, -5.61777, 5.15963, 5.15125, 6.45191, 12.9767, 3.58017, 15.4177, 3.14941, 18.0023, -2.73766, 18.0023, -2.80945, 15.4895, -4.60429, 14.628, -5.89657, 11.2537, -4.31711, 5.58201, -5.5376, -6.33571, -3, -15 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -61,6 +63,7 @@ texture = ExtResource( 3 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion/Area2D"]
+visible = false
 shape = SubResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="Explosion"]

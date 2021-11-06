@@ -5,7 +5,7 @@ onready var path_follow = self
 var move_direction = 0
 
 #Enemy Variables
-var hp = 40
+var hp = 50
 var speed = 50
 var damage = 2
 
@@ -32,8 +32,16 @@ func _on_Area2D_area_entered(area):
 		if area.getExplode():
 			hp -= 20
 	if hp <= 0:
-		get_parent().get_parent().add_cash(1)
-		queue_free()
+		instance = tier1.instance()
+		instance.set_offset(self.get_offset() - 10)
+		get_parent().add_child(instance)
+		instance = tier1.instance()
+		instance.set_offset(self.get_offset() - 20)
+		get_parent().add_child(instance)
+		self.queue_free()
 
 func get_damage():
 	return damage
+
+func kill():
+	queue_free()
